@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.users',
+    'DjangoUeditor',
+    'goods',
+    'trade',
+    'user_operation'
 ]
 
 MIDDLEWARE = [
