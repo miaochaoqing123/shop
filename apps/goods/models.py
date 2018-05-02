@@ -30,9 +30,10 @@ class GoodsCategory(models.Model):
 
 class GoodsCategoryBrand(models.Model):
     """品牌名"""
+    category = models.ForeignKey(GoodsCategory, null=True, blank=True, verbose_name='商品类目')
     name = models.CharField(default='', max_length=30, verbose_name='品牌名', help_text='品牌名')
     desc = models.TextField(default='', max_length=200, verbose_name='品牌描述', help_text='品牌描述')
-    image = models.ImageField(max_length=200, upload_to='brand/images/')
+    image = models.ImageField(max_length=200, upload_to='brand/')
     add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
@@ -58,9 +59,10 @@ class Goods(models.Model):
     goods_desc = UEditorField(verbose_name=u'内容', imagePath='goods/images/', width=1000, height=300,
                               filePath='goods/files/', default='')
     ship_free = models.BooleanField(default=True, verbose_name='是否承担运费')
-    goods_front_images = models.ImageField(upload_to='', null=True, blank=True, verbose_name='封面图片')
+    goods_front_images = models.ImageField(upload_to='goods/images/', null=True, blank=True, verbose_name='封面图片')
     is_new = models.BooleanField(default=False, verbose_name='是否新品')
     is_hot = models.BooleanField(default=False, verbose_name='是否热销')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
         verbose_name = '商品'
@@ -74,8 +76,8 @@ class GoodsImage(models.Model):
     """商品轮播图"""
     goods = models.ForeignKey(Goods, verbose_name='商品', related_name='images')
     image = models.ImageField(upload_to='', verbose_name='图片', null=True, blank=True)
-    add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
     image_url = models.CharField(max_length=300, null=True, blank=True, verbose_name='图片url')
+    add_time = models.DateTimeField(default=datetime.now, verbose_name='添加时间')
 
     class Meta:
         verbose_name = '商品图片'

@@ -8,7 +8,7 @@ User = get_user_model()
 # Create your models here.
 
 
-class Shopping(models.Model):
+class ShoppingCart(models.Model):
     """购物车"""
     user = models.ForeignKey(User, verbose_name=u'用户')
     goods = models.ForeignKey(Goods, verbose_name=u'商品')
